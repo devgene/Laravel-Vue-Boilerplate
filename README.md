@@ -1,9 +1,8 @@
 # LaravelVueBoilerplate
 
 
-<a href="https://github.com/cretueusebiu/laravel-vue-spa/actions"><img src="https://github.com/cretueusebiu/laravel-vue-spa/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/cretueusebiu/laravel-vue-spa"><img src="https://poser.pugx.org/cretueusebiu/laravel-vue-spa/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/cretueusebiu/laravel-vue-spa"><img src="https://poser.pugx.org/cretueusebiu/laravel-vue-spa/v/stable.svg" alt="Latest Stable Version"></a>
+[![Github All Releases](https://img.shields.io/github/downloads/devgene/Laravel-Vue-Boilerplate/total.svg)]()
+<a href="https://packagist.org/packages/devgene/Laravel-Vue-Boilerplate"><img src="https://poser.pugx.org/devgene/Laravel-Vue-Boilerplate/v/stable.svg" alt="Latest Stable Version"></a>
 
 ![login](https://user-images.githubusercontent.com/16412194/119227496-c3ecdc80-bb2b-11eb-9ada-25012669c7f7.png)
 
