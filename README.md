@@ -1,6 +1,6 @@
 # LaravelVueBoilerplate
 
-<a href="https://github.com/devgene/Laravel-Vue-Boilerplate/actions"><img src="https://github.com/devgene/Laravel-Vue-Boilerplate/workflows/laravel/badge.svg" alt="Build Status"></a>
+
 [![Github All Releases](https://img.shields.io/github/downloads/devgene/Laravel-Vue-Boilerplate/total.svg)]()
 <a href="https://packagist.org/packages/devgene/Laravel-Vue-Boilerplate"><img src="https://poser.pugx.org/devgene/Laravel-Vue-Boilerplate/v/stable.svg" alt="Latest Stable Version"></a>
 
