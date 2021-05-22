@@ -27,28 +27,22 @@ jobs:
     - name: Create Database
       run: |
         mkdir -p database
-        touch database/database.sqlite
+        touch database/database.mysql
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
-        DB_CONNECTION: sqlite
-        DB_DATABASE: database/database.sqlite
+        DB_CONNECTION: mysql
+        DB_DATABASE: database/database.mysql
     - name: Run Laravel server
       run: php artisan serve &
+    - name: composer update
+      run: composer update
+    - name: migrate
+      run: php artisan migrate
     - name: Run Dusk tests
+      run: npm install
+    - name: install passport
+      run: php artisan passport:install
+           php artisan serve
       env:
           APP_URL: "http://127.0.0.1:8000"
           run: php artisan dusk
-   
-    - name: Upload screenshots
-      if: failure()
-      uses: actions/upload-artifact@v2
-      with:
-          name: screenshots
-          path: tests/Browser/screenshots
-      
-    - name: Upload console logs
-      if: failure()
-      uses: actions/upload-artifact@v2
-      with:
-          name: console
-          path: tests/Browser/console
