@@ -9,7 +9,7 @@
 
 ## Features
 
-- Laravel 7
+- Laravel 8
 - Vue + VueRouter + Vuex
 - Pages with dynamic import and custom layouts
 - Login, register, email verification and password reset
