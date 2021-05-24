@@ -31,6 +31,7 @@ class AuthController extends Controller
         $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->assignRole(config('access.users.default_role'));
 
         if ($user->save()){
          return $this->getResponse($user);

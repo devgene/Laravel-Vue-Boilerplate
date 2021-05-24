@@ -16,6 +16,11 @@ const routes = [
                 name: 'dashboard',
                 component: () =>import('./views/Dashboard.vue')
             },
+            {
+                path: '/user',
+                name: 'user',
+                component: () =>import('./views/User.vue')
+            },
         ],
         beforeEnter(to, from, next){
             if (!auth.isLoggedIn()){

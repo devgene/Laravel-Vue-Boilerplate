@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -30,4 +32,6 @@ Route::group(['prefix' => 'auth'],function (){
 });
 
 Route::group(['middleware' => 'auth:api'],function () {
+    Route::resource('roles', 'RoleController');
+    Route::resource('users', 'UserController');
 });
