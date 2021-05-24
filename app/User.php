@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name','last_name', 'email', 'password',
+        'first_name','last_name', 'email','phone', 'password','roles'
     ];
 
     /**
@@ -38,4 +38,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+//    public function getUserJson(User $user){
+//        return response()->json(['id'=>$user->id,
+//            'first_name'=>$user->first_name,
+//            'last_name'=>$user->last_name,
+//            'email'=>$user->email,
+//            'phone'=>$user->phone,
+//            'role'=>$user->getRoleNames()]);
+//    }
+
+
 }

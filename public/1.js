@@ -119,6 +119,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -203,26 +205,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 response = _context2.sent;
-                // console.log(response);
+                console.log('usersss');
+                console.log(response.data.data);
                 this.users = response.data.data; // console.log(this.users);
 
-                _context2.next = 10;
+                _context2.next = 12;
                 break;
 
-              case 7:
-                _context2.prev = 7;
+              case 9:
+                _context2.prev = 9;
                 _context2.t0 = _context2["catch"](0);
                 this.flashMessage.error({
                   message: 'Some error occured',
                   time: 5000
                 });
 
-              case 10:
+              case 12:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[0, 7]]);
+        }, _callee2, this, [[0, 9]]);
       }));
 
       function getUsers() {
@@ -241,8 +244,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 formData = new FormData();
                 formData.append('first_name', this.userData.first_name);
                 formData.append('last_name', this.userData.last_name);
-                formData.append('phone', this.userData.phone);
                 formData.append('email', this.userData.email);
+                formData.append('phone', this.userData.phone);
                 formData.append('password', this.userData.password);
                 formData.append('role', this.userData.role);
                 _context3.prev = 7;
@@ -623,40 +626,55 @@ var render = function() {
                         "tbody",
                         _vm._l(_vm.users, function(user, index) {
                           return _vm.users
-                            ? _c("tr", { key: index }, [
-                                _c("td", [_vm._v(_vm._s(index + 1))]),
-                                _vm._v(" "),
-                                _c("td", [_vm._v(_vm._s(user.first_name))]),
-                                _vm._v(" "),
-                                _c("td", [_vm._v(_vm._s(user.last_name))]),
-                                _vm._v(" "),
-                                _c("td", [_vm._v(_vm._s(user.email))]),
-                                _vm._v(" "),
-                                _c("td", [_vm._v(_vm._s(user.phone))]),
-                                _vm._v(" "),
-                                _c("td"),
-                                _vm._v(" "),
-                                _c(
-                                  "td",
-                                  [
-                                    _c(
-                                      "router-link",
-                                      {
-                                        staticClass:
-                                          "btn btn-info btn-circle btn-sm",
-                                        attrs: {
-                                          to: {
-                                            name: "user-detail",
-                                            params: { id: user.id }
+                            ? _c(
+                                "tr",
+                                { key: index },
+                                [
+                                  _c("td", [_vm._v(_vm._s(index + 1))]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(user.first_name))]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(user.last_name))]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(user.email))]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(user.phone))]),
+                                  _vm._v(" "),
+                                  _vm._l(user.roles, function(role, index) {
+                                    return user.roles
+                                      ? _c("td", { key: index }, [
+                                          _vm._v(
+                                            "\n                                        " +
+                                              _vm._s(role.name) +
+                                              "\n                                    "
+                                          )
+                                        ])
+                                      : _vm._e()
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "td",
+                                    [
+                                      _c(
+                                        "router-link",
+                                        {
+                                          staticClass:
+                                            "btn btn-info btn-circle btn-sm",
+                                          attrs: {
+                                            to: {
+                                              name: "user-detail",
+                                              params: { id: user.id }
+                                            }
                                           }
-                                        }
-                                      },
-                                      [_c("i", { staticClass: "fas fa-eye" })]
-                                    )
-                                  ],
-                                  1
-                                )
-                              ])
+                                        },
+                                        [_c("i", { staticClass: "fas fa-eye" })]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                2
+                              )
                             : _vm._e()
                         }),
                         0
