@@ -121,6 +121,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -164,26 +167,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 response = _context.sent;
-                console.log('ssssss');
-                console.log(response.data.data);
                 this.roles = response.data.data;
-                _context.next = 12;
+                _context.next = 10;
                 break;
 
-              case 9:
-                _context.prev = 9;
+              case 7:
+                _context.prev = 7;
                 _context.t0 = _context["catch"](0);
                 this.flashMessage.error({
                   message: 'Some error occured',
                   time: 5000
                 });
 
-              case 12:
+              case 10:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 9]]);
+        }, _callee, this, [[0, 7]]);
       }));
 
       function getRoles() {
@@ -205,27 +206,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 response = _context2.sent;
-                console.log('usersss');
-                console.log(response.data.data);
-                this.users = response.data.data; // console.log(this.users);
-
-                _context2.next = 12;
+                this.users = response.data.data;
+                _context2.next = 10;
                 break;
 
-              case 9:
-                _context2.prev = 9;
+              case 7:
+                _context2.prev = 7;
                 _context2.t0 = _context2["catch"](0);
                 this.flashMessage.error({
                   message: 'Some error occured',
                   time: 5000
                 });
 
-              case 12:
+              case 10:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[0, 9]]);
+        }, _callee2, this, [[0, 7]]);
       }));
 
       function getUsers() {
@@ -303,6 +301,53 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return createUser;
+    }(),
+    deleteUser: function () {
+      var _deleteUser = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(user) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                if (window.confirm("Are you sure want to delete ".concat(user.first_name, " ").concat(user.last_name))) {
+                  _context4.next = 2;
+                  break;
+                }
+
+                return _context4.abrupt("return");
+
+              case 2:
+                _context4.prev = 2;
+                _context4.next = 5;
+                return _services_user_service__WEBPACK_IMPORTED_MODULE_1__["deleteUser"](user.id);
+
+              case 5:
+                this.users = this.users.filter(function (obj) {
+                  return obj.id != user.id;
+                });
+                _context4.next = 11;
+                break;
+
+              case 8:
+                _context4.prev = 8;
+                _context4.t0 = _context4["catch"](2);
+                this.flashMessage.error({
+                  message: _context4.t0.response.data.message,
+                  time: 5000
+                });
+
+              case 11:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this, [[2, 8]]);
+      }));
+
+      function deleteUser(_x) {
+        return _deleteUser.apply(this, arguments);
+      }
+
+      return deleteUser;
     }()
   }
 });
@@ -581,9 +626,9 @@ var render = function() {
                               { domProps: { value: role.name } },
                               [
                                 _vm._v(
-                                  "\n                                        " +
+                                  "\n                                                " +
                                     _vm._s(role.name) +
-                                    "\n                                    "
+                                    "\n                                            "
                                 )
                               ]
                             )
@@ -644,34 +689,29 @@ var render = function() {
                                     return user.roles
                                       ? _c("td", { key: index }, [
                                           _vm._v(
-                                            "\n                                        " +
+                                            "\n                                                " +
                                               _vm._s(role.name) +
-                                              "\n                                    "
+                                              "\n                                            "
                                           )
                                         ])
                                       : _vm._e()
                                   }),
                                   _vm._v(" "),
-                                  _c(
-                                    "td",
-                                    [
-                                      _c(
-                                        "router-link",
-                                        {
-                                          staticClass:
-                                            "btn btn-info btn-circle btn-sm",
-                                          attrs: {
-                                            to: {
-                                              name: "user-detail",
-                                              params: { id: user.id }
-                                            }
+                                  _c("td", [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "btn btn-danger btn-circle btn-sm",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.deleteUser(user)
                                           }
-                                        },
-                                        [_c("i", { staticClass: "fas fa-eye" })]
-                                      )
-                                    ],
-                                    1
-                                  )
+                                        }
+                                      },
+                                      [_c("i", { staticClass: "fas fa-trash" })]
+                                    )
+                                  ])
                                 ],
                                 2
                               )
@@ -759,17 +799,21 @@ function getRoles() {
 /*!***********************************************!*\
   !*** ./resources/js/services/user_service.js ***!
   \***********************************************/
-/*! exports provided: createUser, getUsers */
+/*! exports provided: createUser, deleteUser, getUsers */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createUser", function() { return createUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteUser", function() { return deleteUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUsers", function() { return getUsers; });
 /* harmony import */ var _http_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./http_service */ "./resources/js/services/http_service.js");
 
 function createUser(data) {
   return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().post('/users', data);
+}
+function deleteUser(id) {
+  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])()["delete"]("/users/".concat(id));
 }
 function getUsers() {
   return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().get('/users');
