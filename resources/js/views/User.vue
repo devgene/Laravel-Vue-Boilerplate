@@ -1,105 +1,104 @@
 <template>
 
-        <div class="container-fluid">
+    <div class="container-fluid">
 
-            <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Users</h1>
-            </div>
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Users</h1>
+        </div>
 
-            <div class="row">
+        <div class="row">
 
-                <!-- Area Chart -->
-                <div class="col-xl-12 col-lg-12">
-                    <div class="card shadow mb-4">
-                        <!-- Card Header - Dropdown -->
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Create user</h6>
-                            <b-button id="show-btn" @click="showNewUserModel">Create User</b-button>
-                        </div>
+            <!-- Area Chart -->
+            <div class="col-xl-12 col-lg-12">
 
-                        <b-modal ref="newUserModel" hide-footer title="create new user">
-                            <div class="form" v-on:submit.prevent="createUser" style="margin: 10px">
-                                <form>
-                                    <div class="form-group">
-                                        <label for="first_name">First Name</label>
-                                        <input type="text" v-model="userData.first_name" class="form-control" id="first_name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="last_name">Last Name</label>
-                                        <input type="text" class="form-control" v-model="userData.last_name" id="last_name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input type="email" v-model="userData.email" class="form-control" id="email">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="phone">Phone</label>
-                                        <input type="number" v-model="userData.phone" class="form-control" id="phone">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="password">Password</label>
-                                        <input type="password" v-model="userData.password" class="form-control" id="password">
-                                    </div>
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Create user</h6>
+                    <b-button id="show-btn" @click="showNewUserModel">Create User</b-button>
+                </div>
 
-                                    <div class="form-group">
-                                        <label for="role">Role</label>
-                                        <select id="role" v-model="userData.role" class="form-control">
-                                            <option v-for="(role, index) in roles" v-bind:value="role.name">
-                                                {{ role.name }}
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <button type="submit" class="btn btn-success">save</button>
-                                </form>
+                <b-modal ref="newUserModel" hide-footer title="create new user">
+                    <div class="form" v-on:submit.prevent="createUser" style="margin: 10px">
+                        <form>
+                            <div class="form-group">
+                                <label for="first_name">First Name</label>
+                                <input type="text" v-model="userData.first_name" class="form-control" id="first_name">
                             </div>
-                        </b-modal>
-
-
-                        <div class="card shadow mb-4">
-
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                        <tr>
-                                            <th>S.no</th>
-                                            <th>First Name</th>
-                                            <th>Last name</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Role</th>
-                                            <th>Action</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr v-if="users" v-for="(user,index) in users" :key="index">
-                                            <td>{{index+1}}</td>
-                                            <td>{{user.first_name}}</td>
-                                            <td>{{user.last_name}}</td>
-                                            <td>{{user.email}}</td>
-                                            <td>{{user.phone}}</td>
-                                            <td v-if="user.roles" v-for="(role,index) in user.roles" :key="index">
-                                                {{role.name}}
-                                            </td>
-                                            <td>
-<!--                                                <router-link :to="{ name: 'user-detail', params: { id: user.id }}"-->
-<!--                                                             class="btn btn-info btn-circle btn-sm">-->
-<!--                                                    <i class="fas fa-eye"></i>-->
-<!--                                                </router-link>-->
-                                                <button v-on:click="deleteUser(user)" class="btn btn-danger btn-circle btn-sm">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <div class="form-group">
+                                <label for="last_name">Last Name</label>
+                                <input type="text" class="form-control" v-model="userData.last_name" id="last_name">
                             </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" v-model="userData.email" class="form-control" id="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="number" v-model="userData.phone" class="form-control" id="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" v-model="userData.password" class="form-control" id="password">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="role">Role</label>
+                                <select id="role" v-model="userData.role" class="form-control">
+                                    <option v-for="(role, index) in roles" v-bind:value="role.name">
+                                        {{ role.name }}
+                                    </option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-success">save</button>
+                        </form>
+                    </div>
+                </b-modal>
+
+
+                <div class="card shadow mb-4">
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>S.no</th>
+                                    <th>First Name</th>
+                                    <th>Last name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Role</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-if="users" v-for="(user,index) in users" :key="index">
+                                    <td>{{index+1}}</td>
+                                    <td>{{user.first_name}}</td>
+                                    <td>{{user.last_name}}</td>
+                                    <td>{{user.email}}</td>
+                                    <td>{{user.phone}}</td>
+                                    <td v-if="user.roles" v-for="(role,index) in user.roles" :key="index">
+                                        {{role.name}}
+                                    </td>
+                                    <td>
+                                        <!--                                                <router-link :to="{ name: 'user-detail', params: { id: user.id }}"-->
+                                        <!--                                                             class="btn btn-info btn-circle btn-sm">-->
+                                        <!--                                                    <i class="fas fa-eye"></i>-->
+                                        <!--                                                </router-link>-->
+                                        <button v-on:click="deleteUser(user)" class="btn btn-danger btn-circle btn-sm">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
 </template>
 
@@ -196,37 +195,37 @@
                     }
                 }
             },
-            deleteUser: async function(user){
+            deleteUser: async function (user) {
 
                 this.$confirm({
-                        title:'Are you sure?',
-                        message: `you want to delete ${user.first_name} ${user.last_name}?`,
-                        button: {
-                            no: 'No',
-                            yes: 'Yes'
-                        },
-                        /**
-                         * Callback Function
-                         * @param {Boolean} confirm
-                         */
-                        callback: confirm => {
-                            if (confirm) {
-                                try {
-                                    userService.deleteUser(user.id);
-                                    this.users = this.users.filter(obj => {
-                                        return obj.id != user.id;
-                                    });
+                    title: 'Are you sure?',
+                    message: `you want to delete ${user.first_name} ${user.last_name}?`,
+                    button: {
+                        no: 'No',
+                        yes: 'Yes'
+                    },
+                    /**
+                     * Callback Function
+                     * @param {Boolean} confirm
+                     */
+                    callback: confirm => {
+                        if (confirm) {
+                            try {
+                                userService.deleteUser(user.id);
+                                this.users = this.users.filter(obj => {
+                                    return obj.id != user.id;
+                                });
 
-                                } catch (error) {
-                                    this.flashMessage.error({
-                                        message: error.response.data.message,
-                                        time: 5000
-                                    });
+                            } catch (error) {
+                                this.flashMessage.error({
+                                    message: error.response.data.message,
+                                    time: 5000
+                                });
 
-                                }
                             }
                         }
-                    });
+                    }
+                });
             }
         }
     }
