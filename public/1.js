@@ -123,6 +123,45 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -139,6 +178,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         password: '',
         role: ''
       },
+      editUserData: {},
       errors: {}
     };
   },
@@ -301,13 +341,97 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return createUser;
     }(),
-    deleteUser: function () {
-      var _deleteUser = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(user) {
-        var _this = this;
-
+    hideEditUserModel: function hideEditUserModel() {
+      this.$refs.editUserModel.hide();
+    },
+    showEditUserModel: function showEditUserModel() {
+      this.$refs.editUserModel.show();
+    },
+    editUser: function editUser(user) {
+      this.editUserData = user;
+      this.showEditUserModel();
+    },
+    updateUser: function () {
+      var _updateUser = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var formData, response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
+              case 0:
+                formData = new FormData();
+                formData.append('first_name', this.editUserData.first_name);
+                formData.append('last_name', this.editUserData.last_name);
+                formData.append('email', this.editUserData.email);
+                formData.append('phone', this.editUserData.phone);
+                formData.append('role', this.editUserData.roles[0].name);
+                formData.append('_method', 'put');
+                console.log(this.editUserData.role);
+                _context4.prev = 8;
+                _context4.next = 11;
+                return _services_user_service__WEBPACK_IMPORTED_MODULE_1__["updateUser"](this.editUserData.id, formData);
+
+              case 11:
+                response = _context4.sent;
+                this.users.map(function (user) {
+                  if (user.id == response.data.id) {
+                    user = response.data;
+                  }
+                });
+                this.hideEditUserModel();
+                this.flashMessage.success({
+                  title: 'User Successfully Updated'
+                });
+                _context4.next = 27;
+                break;
+
+              case 17:
+                _context4.prev = 17;
+                _context4.t0 = _context4["catch"](8);
+                _context4.t1 = _context4.t0.response.status;
+                _context4.next = _context4.t1 === 422 ? 22 : _context4.t1 === 500 ? 24 : 26;
+                break;
+
+              case 22:
+                this.flashMessage.error({
+                  message: _context4.t0.response.data.errors,
+                  time: 5000
+                });
+                return _context4.abrupt("break", 27);
+
+              case 24:
+                this.flashMessage.error({
+                  message: _context4.t0.response.data.message,
+                  time: 5000
+                });
+                return _context4.abrupt("break", 27);
+
+              case 26:
+                this.flashMessage.error({
+                  message: _context4.t0.response.data.message,
+                  time: 5000
+                });
+
+              case 27:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this, [[8, 17]]);
+      }));
+
+      function updateUser() {
+        return _updateUser.apply(this, arguments);
+      }
+
+      return updateUser;
+    }(),
+    deleteUser: function () {
+      var _deleteUser = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(user) {
+        var _this = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
               case 0:
                 this.$confirm({
                   title: 'Are you sure?',
@@ -340,10 +464,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 1:
               case "end":
-                return _context4.stop();
+                return _context5.stop();
             }
           }
-        }, _callee4, this);
+        }, _callee5, this);
       }));
 
       function deleteUser(_x) {
@@ -402,6 +526,90 @@ var render = function() {
             ],
             1
           ),
+          _vm._v(" "),
+          _c("div", { staticClass: "card shadow mb-4" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "table-responsive" }, [
+                _c(
+                  "table",
+                  {
+                    staticClass: "table table-bordered",
+                    attrs: { id: "dataTable", width: "100%", cellspacing: "0" }
+                  },
+                  [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.users, function(user, index) {
+                        return _vm.users
+                          ? _c(
+                              "tr",
+                              { key: index },
+                              [
+                                _c("td", [_vm._v(_vm._s(index + 1))]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(user.first_name))]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(user.last_name))]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(user.email))]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(user.phone))]),
+                                _vm._v(" "),
+                                _vm._l(user.roles, function(role, index) {
+                                  return user.roles
+                                    ? _c("td", { key: index }, [
+                                        _vm._v(
+                                          "\n                                    " +
+                                            _vm._s(role.name) +
+                                            "\n                                "
+                                        )
+                                      ])
+                                    : _vm._e()
+                                }),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "btn btn-info btn-circle btn-sm",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.editUser(user)
+                                        }
+                                      }
+                                    },
+                                    [_c("i", { staticClass: "fas fa-edit" })]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "btn btn-danger btn-circle btn-sm",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.deleteUser(user)
+                                        }
+                                      }
+                                    },
+                                    [_c("i", { staticClass: "fas fa-trash" })]
+                                  )
+                                ])
+                              ],
+                              2
+                            )
+                          : _vm._e()
+                      }),
+                      0
+                    )
+                  ]
+                )
+              ])
+            ])
+          ]),
           _vm._v(" "),
           _c(
             "b-modal",
@@ -629,89 +837,262 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-success",
-                        attrs: { type: "submit" }
-                      },
-                      [_vm._v("save")]
-                    )
+                    _c("hr"),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "text-right" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-default",
+                          attrs: { type: "button" },
+                          on: { click: _vm.hideNewUserModel }
+                        },
+                        [_vm._v("Cancel")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Save")]
+                      )
+                    ])
                   ])
                 ]
               )
             ]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "card shadow mb-4" }, [
-            _c("div", { staticClass: "card-body" }, [
-              _c("div", { staticClass: "table-responsive" }, [
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-bordered",
-                    attrs: { id: "dataTable", width: "100%", cellspacing: "0" }
-                  },
-                  [
-                    _vm._m(1),
-                    _vm._v(" "),
-                    _c(
-                      "tbody",
-                      _vm._l(_vm.users, function(user, index) {
-                        return _vm.users
-                          ? _c(
-                              "tr",
-                              { key: index },
-                              [
-                                _c("td", [_vm._v(_vm._s(index + 1))]),
-                                _vm._v(" "),
-                                _c("td", [_vm._v(_vm._s(user.first_name))]),
-                                _vm._v(" "),
-                                _c("td", [_vm._v(_vm._s(user.last_name))]),
-                                _vm._v(" "),
-                                _c("td", [_vm._v(_vm._s(user.email))]),
-                                _vm._v(" "),
-                                _c("td", [_vm._v(_vm._s(user.phone))]),
-                                _vm._v(" "),
-                                _vm._l(user.roles, function(role, index) {
-                                  return user.roles
-                                    ? _c("td", { key: index }, [
-                                        _vm._v(
-                                          "\n                                    " +
-                                            _vm._s(role.name) +
-                                            "\n                                "
-                                        )
-                                      ])
-                                    : _vm._e()
-                                }),
-                                _vm._v(" "),
-                                _c("td", [
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass:
-                                        "btn btn-danger btn-circle btn-sm",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.deleteUser(user)
-                                        }
-                                      }
-                                    },
-                                    [_c("i", { staticClass: "fas fa-trash" })]
-                                  )
-                                ])
-                              ],
-                              2
+          _c(
+            "b-modal",
+            {
+              ref: "editUserModel",
+              attrs: { "hide-footer": "", title: "create edit user" }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "form",
+                  staticStyle: { margin: "10px" },
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.updateUser($event)
+                    }
+                  }
+                },
+                [
+                  _c("form", [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "edit_first_name" } }, [
+                        _vm._v("First Name")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.editUserData.first_name,
+                            expression: "editUserData.first_name"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "edit_first_name" },
+                        domProps: { value: _vm.editUserData.first_name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.editUserData,
+                              "first_name",
+                              $event.target.value
                             )
-                          : _vm._e()
-                      }),
-                      0
-                    )
-                  ]
-                )
-              ])
-            ])
-          ])
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "edit_last_name" } }, [
+                        _vm._v("Last Name")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.editUserData.last_name,
+                            expression: "editUserData.last_name"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "edit_last_name" },
+                        domProps: { value: _vm.editUserData.last_name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.editUserData,
+                              "last_name",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "edit_email" } }, [
+                        _vm._v("Email")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.editUserData.email,
+                            expression: "editUserData.email"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "email", id: "edit_email" },
+                        domProps: { value: _vm.editUserData.email },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.editUserData,
+                              "email",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "edit_phone" } }, [
+                        _vm._v("Phone")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.editUserData.phone,
+                            expression: "editUserData.phone"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "number", id: "edit_phone" },
+                        domProps: { value: _vm.editUserData.phone },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.editUserData,
+                              "phone",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "edit_role" } }, [
+                        _vm._v("Role")
+                      ]),
+                      _vm._v(" "),
+                      _vm.editUserData.roles
+                        ? _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.editUserData.roles[0].name,
+                                  expression: "editUserData.roles[0].name"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { id: "edit_role" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.editUserData.roles[0],
+                                    "name",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            _vm._l(_vm.roles, function(role) {
+                              return _c(
+                                "option",
+                                { domProps: { value: role.name } },
+                                [_vm._v(_vm._s(role.name))]
+                              )
+                            }),
+                            0
+                          )
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c("hr"),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "text-right" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-default",
+                          attrs: { type: "button" },
+                          on: { click: _vm.hideEditUserModel }
+                        },
+                        [_vm._v("Cancel")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Update")]
+                      )
+                    ])
+                  ])
+                ]
+              )
+            ]
+          )
         ],
         1
       )
@@ -790,13 +1171,14 @@ function deleteRole(id) {
 /*!***********************************************!*\
   !*** ./resources/js/services/user_service.js ***!
   \***********************************************/
-/*! exports provided: createUser, deleteUser, getUsers */
+/*! exports provided: createUser, deleteUser, updateUser, getUsers */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createUser", function() { return createUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteUser", function() { return deleteUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateUser", function() { return updateUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUsers", function() { return getUsers; });
 /* harmony import */ var _http_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./http_service */ "./resources/js/services/http_service.js");
 
@@ -805,6 +1187,9 @@ function createUser(data) {
 }
 function deleteUser(id) {
   return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])()["delete"]("/users/".concat(id));
+}
+function updateUser(id, data) {
+  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().post("/users/".concat(id), data);
 }
 function getUsers() {
   return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().get('/users');

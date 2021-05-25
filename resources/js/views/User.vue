@@ -17,6 +17,47 @@
                     <b-button id="show-btn" @click="showNewUserModel">Create User</b-button>
                 </div>
 
+                <div class="card shadow mb-4">
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>S.no</th>
+                                    <th>First Name</th>
+                                    <th>Last name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Role</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-if="users" v-for="(user,index) in users" :key="index">
+                                    <td>{{index+1}}</td>
+                                    <td>{{user.first_name}}</td>
+                                    <td>{{user.last_name}}</td>
+                                    <td>{{user.email}}</td>
+                                    <td>{{user.phone}}</td>
+                                    <td v-if="user.roles" v-for="(role,index) in user.roles" :key="index">
+                                        {{role.name}}
+                                    </td>
+                                    <td>
+                                        <button v-on:click="editUser(user)" class="btn btn-info btn-circle btn-sm">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button v-on:click="deleteUser(user)" class="btn btn-danger btn-circle btn-sm">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
                 <b-modal ref="newUserModel" hide-footer title="create new user">
                     <div class="form" v-on:submit.prevent="createUser" style="margin: 10px">
                         <form>
@@ -49,53 +90,51 @@
                                     </option>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-success">save</button>
+                            <hr>
+                            <div class="text-right">
+                                <button type="button" class="btn btn-default" v-on:click="hideNewUserModel">Cancel</button>
+                                <button type="submit" class="btn btn-success">Save</button>
+
+                            </div>
+                        </form>
+                    </div>
+                </b-modal>
+                <b-modal ref="editUserModel" hide-footer title="create edit user">
+                    <div class="form" v-on:submit.prevent="updateUser" style="margin: 10px">
+                        <form>
+                            <div class="form-group">
+                                <label for="edit_first_name">First Name</label>
+                                <input type="text" v-model="editUserData.first_name" class="form-control" id="edit_first_name">
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_last_name">Last Name</label>
+                                <input type="text" class="form-control" v-model="editUserData.last_name" id="edit_last_name">
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_email">Email</label>
+                                <input type="email" v-model="editUserData.email" class="form-control" id="edit_email">
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_phone">Phone</label>
+                                <input type="number" v-model="editUserData.phone" class="form-control" id="edit_phone">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="edit_role">Role</label>
+                                <select  id="edit_role" class="form-control" v-if="editUserData.roles" v-model="editUserData.roles[0].name">
+                                    <option v-for="role in roles" v-bind:value="role.name" >{{ role.name }}</option>
+                                </select>
+                            </div>
+                            <hr>
+                            <div class="text-right">
+                                <button type="button" class="btn btn-default" v-on:click="hideEditUserModel">Cancel</button>
+                                <button type="submit" class="btn btn-success">Update</button>
+
+                            </div>
                         </form>
                     </div>
                 </b-modal>
 
-
-                <div class="card shadow mb-4">
-
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                <tr>
-                                    <th>S.no</th>
-                                    <th>First Name</th>
-                                    <th>Last name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Role</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr v-if="users" v-for="(user,index) in users" :key="index">
-                                    <td>{{index+1}}</td>
-                                    <td>{{user.first_name}}</td>
-                                    <td>{{user.last_name}}</td>
-                                    <td>{{user.email}}</td>
-                                    <td>{{user.phone}}</td>
-                                    <td v-if="user.roles" v-for="(role,index) in user.roles" :key="index">
-                                        {{role.name}}
-                                    </td>
-                                    <td>
-                                        <!--                                                <router-link :to="{ name: 'user-detail', params: { id: user.id }}"-->
-                                        <!--                                                             class="btn btn-info btn-circle btn-sm">-->
-                                        <!--                                                    <i class="fas fa-eye"></i>-->
-                                        <!--                                                </router-link>-->
-                                        <button v-on:click="deleteUser(user)" class="btn btn-danger btn-circle btn-sm">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -120,6 +159,7 @@
                     password: '',
                     role: '',
                 },
+                editUserData:{},
                 errors: {}
             }
         },
@@ -171,6 +211,59 @@
                     this.hideNewUserModel();
                     this.flashMessage.success({
                         title: 'User Successfully Created',
+                    });
+
+                } catch (error) {
+                    switch (error.response.status) {
+                        case 422:
+                            this.flashMessage.error({
+                                message: error.response.data.errors,
+                                time: 5000
+                            });
+                            break;
+                        case 500:
+                            this.flashMessage.error({
+                                message: error.response.data.message,
+                                time: 5000
+                            });
+                            break;
+                        default:
+                            this.flashMessage.error({
+                                message: error.response.data.message,
+                                time: 5000
+                            });
+                    }
+                }
+            },
+            hideEditUserModel() {
+                this.$refs.editUserModel.hide();
+            },
+            showEditUserModel() {
+                this.$refs.editUserModel.show();
+            },
+            editUser(user) {
+                this.editUserData=user;
+                this.showEditUserModel();
+            },
+            updateUser: async function () {
+                let formData = new FormData();
+                formData.append('first_name', this.editUserData.first_name);
+                formData.append('last_name', this.editUserData.last_name);
+                formData.append('email', this.editUserData.email);
+                formData.append('phone', this.editUserData.phone);
+                formData.append('role', this.editUserData.roles[0].name);
+                formData.append('_method','put');
+                console.log( this.editUserData.role);
+                try {
+                    const response = await userService.updateUser(this.editUserData.id,formData);
+                    this.users.map(user=>{
+                        if(user.id == response.data.id){
+                            user=response.data;
+                        }
+                    });
+                    this.hideEditUserModel();
+                    this.flashMessage.success({
+                        title: 'User Successfully Updated',
                     });
 
                 } catch (error) {

@@ -87,8 +87,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Role",
@@ -290,155 +288,149 @@ var render = function() {
     _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-xl-12 col-lg-12" }, [
-        _c(
-          "div",
-          { staticClass: "card shadow mb-4" },
-          [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "card-header py-3 d-flex flex-row align-items-center justify-content-between"
-              },
-              [
-                _c("h6", { staticClass: "m-0 font-weight-bold text-primary" }, [
-                  _vm._v("Create role")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "b-button",
-                  {
-                    attrs: { id: "show-btn" },
-                    on: { click: _vm.showNewRoleModel }
-                  },
-                  [_vm._v("Create Role")]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "b-modal",
-              {
-                ref: "newRoleModel",
-                attrs: { "hide-footer": "", title: "create new role" }
-              },
-              [
-                _c(
-                  "div",
-                  {
-                    staticClass: "form",
-                    staticStyle: { margin: "10px" },
-                    on: {
-                      submit: function($event) {
-                        $event.preventDefault()
-                        return _vm.createRole($event)
-                      }
+      _c(
+        "div",
+        { staticClass: "col-xl-12 col-lg-12" },
+        [
+          _c(
+            "div",
+            {
+              staticClass:
+                "card-header py-3 d-flex flex-row align-items-center justify-content-between"
+            },
+            [
+              _c("h6", { staticClass: "m-0 font-weight-bold text-primary" }, [
+                _vm._v("Create role")
+              ]),
+              _vm._v(" "),
+              _c(
+                "b-button",
+                {
+                  attrs: { id: "show-btn" },
+                  on: { click: _vm.showNewRoleModel }
+                },
+                [_vm._v("Create Role")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-modal",
+            {
+              ref: "newRoleModel",
+              attrs: { "hide-footer": "", title: "create new role" }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "form",
+                  staticStyle: { margin: "10px" },
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.createRole($event)
                     }
-                  },
-                  [
-                    _c("form", [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "role_name" } }, [
-                          _vm._v("Role Name")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.roleData.role_name,
-                              expression: "roleData.role_name"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text", id: "role_name" },
-                          domProps: { value: _vm.roleData.role_name },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.roleData,
-                                "role_name",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
+                  }
+                },
+                [
+                  _c("form", [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "role_name" } }, [
+                        _vm._v("Role Name")
                       ]),
                       _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-success",
-                          attrs: { type: "submit" }
-                        },
-                        [_vm._v("save")]
-                      )
-                    ])
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.roleData.role_name,
+                            expression: "roleData.role_name"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "role_name" },
+                        domProps: { value: _vm.roleData.role_name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.roleData,
+                              "role_name",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("save")]
+                    )
+                  ])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "card shadow mb-4" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "table-responsive" }, [
+                _c(
+                  "table",
+                  {
+                    staticClass: "table table-bordered",
+                    attrs: { id: "dataTable", width: "100%", cellspacing: "0" }
+                  },
+                  [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.roles, function(role, index) {
+                        return _vm.roles
+                          ? _c("tr", { key: index }, [
+                              _c("td", [_vm._v(_vm._s(index + 1))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(role.name))]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-danger btn-circle btn-sm",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.deleteRole(role)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "fas fa-trash" })]
+                                )
+                              ])
+                            ])
+                          : _vm._e()
+                      }),
+                      0
+                    )
                   ]
                 )
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "card shadow mb-4" }, [
-              _c("div", { staticClass: "card-body" }, [
-                _c("div", { staticClass: "table-responsive" }, [
-                  _c(
-                    "table",
-                    {
-                      staticClass: "table table-bordered",
-                      attrs: {
-                        id: "dataTable",
-                        width: "100%",
-                        cellspacing: "0"
-                      }
-                    },
-                    [
-                      _vm._m(1),
-                      _vm._v(" "),
-                      _c(
-                        "tbody",
-                        _vm._l(_vm.roles, function(role, index) {
-                          return _vm.roles
-                            ? _c("tr", { key: index }, [
-                                _c("td", [_vm._v(_vm._s(index + 1))]),
-                                _vm._v(" "),
-                                _c("td", [_vm._v(_vm._s(role.name))]),
-                                _vm._v(" "),
-                                _c("td", [
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass:
-                                        "btn btn-danger btn-circle btn-sm",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.deleteRole(role)
-                                        }
-                                      }
-                                    },
-                                    [_c("i", { staticClass: "fas fa-trash" })]
-                                  )
-                                ])
-                              ])
-                            : _vm._e()
-                        }),
-                        0
-                      )
-                    ]
-                  )
-                ])
               ])
             ])
-          ],
-          1
-        )
-      ])
+          ])
+        ],
+        1
+      )
     ])
   ])
 }

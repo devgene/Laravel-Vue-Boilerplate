@@ -93,12 +93,35 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(User $user, Request $request)
     {
-        //
+        Log::info('update.........');
+        $validator = Validator::make($request->all(),[
+            'first_name' => 'required|min:3|max:255',
+            'last_name' => 'required|min:1|max:255',
+            'email' => 'unique:users,email,'.$user->id,
+            'role' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'errors' => $validator->errors()->first(),
+                'status_code' => 422
+            ],422);
+        }
+//        $user = User::query()->find($id);
+        $user->update([
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'email' => $request->input('email'),
+            'phone' => $request->input('phone')
+        ]);
+
+        $user->syncRoles($request->input('role'));
+        return response()->json( $user,200);
     }
 
     /**
