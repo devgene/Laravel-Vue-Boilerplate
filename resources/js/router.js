@@ -21,6 +21,11 @@ const routes = [
                 name: 'user',
                 component: () =>import('./views/User.vue')
             },
+            {
+                path: '/roles',
+                name: 'roles',
+                component: () =>import('./views/Role.vue')
+            },
         ],
         beforeEnter(to, from, next){
             if (!auth.isLoggedIn()){

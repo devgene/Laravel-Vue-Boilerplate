@@ -19,7 +19,6 @@ class RoleController extends Controller
      */
     public function index(Request $request)
     {
-        Log::info('roless');
         $roles = Role::orderBy('id','DESC')->paginate(5);
         return response()->json( $roles,200);
     }
@@ -45,11 +44,11 @@ class RoleController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:roles,name',
-            'permission' => 'required',
+//            'permission' => 'required',
         ]);
 
         $role = Role::create(['name' => $request->input('name')]);
-        $role->syncPermissions($request->input('permission'));
+//        $role->syncPermissions($request->input('permission'));
         return response()->json( $role,200);
     }
     /**
@@ -104,15 +103,27 @@ class RoleController extends Controller
         $role->syncPermissions($request->input('permission'));
         return response()->json( $role,200);
     }
+
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param \App\Role $role
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy(Role $role)
     {
-        DB::table("roles")->where('id',$id)->delete();
-        return response()->json( ['message'=>'roles deleted successfully'],200);
+        Log::info('delete');
+//        $user=User::query()->find($id);
+        if($role->delete()){
+            return response()->json([
+                'message' => 'User delete successfully',
+                'status_code' => 200
+            ],200);
+        }else{
+            return response()->json([
+                'message' => 'Some error occurred,Please try again',
+                'status_code' => 500
+            ],500);
+        }
     }
 }

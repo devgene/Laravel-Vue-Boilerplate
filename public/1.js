@@ -781,13 +781,14 @@ render._withStripped = true
 /*!***********************************************!*\
   !*** ./resources/js/services/role_service.js ***!
   \***********************************************/
-/*! exports provided: createRole, getRoles */
+/*! exports provided: createRole, getRoles, deleteRole */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createRole", function() { return createRole; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRoles", function() { return getRoles; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteRole", function() { return deleteRole; });
 /* harmony import */ var _http_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./http_service */ "./resources/js/services/http_service.js");
 
 function createRole(data) {
@@ -795,6 +796,9 @@ function createRole(data) {
 }
 function getRoles() {
   return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().get('/roles');
+}
+function deleteRole(id) {
+  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])()["delete"]("/roles/".concat(id));
 }
 
 /***/ }),
