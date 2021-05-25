@@ -6,6 +6,10 @@ import 'bootstrap';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import FlashMessage from '@smartweb/vue-flash-message';
+import VueConfirmDialog from 'vue-confirm-dialog'
+
+Vue.use(VueConfirmDialog);
+Vue.component('vue-confirm-dialog', VueConfirmDialog.default);
 Vue.use(FlashMessage);
 Vue.use(BootstrapVue);
 

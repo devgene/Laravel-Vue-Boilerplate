@@ -198,22 +198,35 @@
             },
             deleteUser: async function(user){
 
-                if (!window.confirm(`Are you sure want to delete ${user.first_name} ${user.last_name}`)){
-                    return
-                }
-                try {
-                    await userService.deleteUser(user.id);
-                    this.users = this.users.filter(obj =>{
-                        return obj.id != user.id;
+                this.$confirm({
+                        title:'Are you sure?',
+                        message: `you want to delete ${user.first_name} ${user.last_name}?`,
+                        button: {
+                            no: 'No',
+                            yes: 'Yes'
+                        },
+                        /**
+                         * Callback Function
+                         * @param {Boolean} confirm
+                         */
+                        callback: confirm => {
+                            if (confirm) {
+                                try {
+                                    userService.deleteUser(user.id);
+                                    this.users = this.users.filter(obj => {
+                                        return obj.id != user.id;
+                                    });
+
+                                } catch (error) {
+                                    this.flashMessage.error({
+                                        message: error.response.data.message,
+                                        time: 5000
+                                    });
+
+                                }
+                            }
+                        }
                     });
-
-                }catch (error) {
-                    this.flashMessage.error({
-                    message: error.response.data.message,
-                    time: 5000
-                });
-
-                }
             }
         }
     }

@@ -304,43 +304,47 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }(),
     deleteUser: function () {
       var _deleteUser = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(user) {
+        var _this = this;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                if (window.confirm("Are you sure want to delete ".concat(user.first_name, " ").concat(user.last_name))) {
-                  _context4.next = 2;
-                  break;
-                }
+                this.$confirm({
+                  title: 'Are you sure?',
+                  message: "you want to delete ".concat(user.first_name, " ").concat(user.last_name, "?"),
+                  button: {
+                    no: 'No',
+                    yes: 'Yes'
+                  },
 
-                return _context4.abrupt("return");
-
-              case 2:
-                _context4.prev = 2;
-                _context4.next = 5;
-                return _services_user_service__WEBPACK_IMPORTED_MODULE_1__["deleteUser"](user.id);
-
-              case 5:
-                this.users = this.users.filter(function (obj) {
-                  return obj.id != user.id;
+                  /**
+                   * Callback Function
+                   * @param {Boolean} confirm
+                   */
+                  callback: function callback(confirm) {
+                    if (confirm) {
+                      try {
+                        _services_user_service__WEBPACK_IMPORTED_MODULE_1__["deleteUser"](user.id);
+                        _this.users = _this.users.filter(function (obj) {
+                          return obj.id != user.id;
+                        });
+                      } catch (error) {
+                        _this.flashMessage.error({
+                          message: error.response.data.message,
+                          time: 5000
+                        });
+                      }
+                    }
+                  }
                 });
-                _context4.next = 11;
-                break;
 
-              case 8:
-                _context4.prev = 8;
-                _context4.t0 = _context4["catch"](2);
-                this.flashMessage.error({
-                  message: _context4.t0.response.data.message,
-                  time: 5000
-                });
-
-              case 11:
+              case 1:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, this, [[2, 8]]);
+        }, _callee4, this);
       }));
 
       function deleteUser(_x) {

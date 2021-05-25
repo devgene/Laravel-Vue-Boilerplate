@@ -3,6 +3,7 @@
 
         <router-view></router-view>
         <FlashMessage position="right top"></FlashMessage>
+        <vue-confirm-dialog></vue-confirm-dialog>
     </main>
 </template>
 
