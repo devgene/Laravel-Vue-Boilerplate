@@ -61,7 +61,7 @@ class UserController extends Controller
             'last_name' => $request->input('last_name'),
             'email' => $request->input('email'),
             'phone' => $request->input('phone'),
-            'password' => $request->input('password'),
+            'password' => bcrypt($request->input('password')),
             ]);
         $user->assignRole($request->input('role'));
         return response()->json( $user,200);
