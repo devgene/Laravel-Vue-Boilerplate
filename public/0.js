@@ -81,6 +81,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Login',
@@ -111,8 +112,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 response = _context.sent;
-                this.errors = {};
-                this.$router.push('/home');
+                console.log(response);
+
+                if (response.role === 'administrator') {
+                  this.$router.push('/home');
+                } else {
+                  this.flashMessage.error({
+                    message: response.role + ' is not allowed to login',
+                    time: 5000
+                  });
+                }
+
                 _context.next = 20;
                 break;
 
@@ -196,6 +206,8 @@ var render = function() {
             _c("div", { staticClass: "col-lg-6" }, [
               _c("div", { staticClass: "p-5" }, [
                 _vm._m(0),
+                _vm._v(" "),
+                _c("p", { attrs: { id: "error" } }),
                 _vm._v(" "),
                 _c(
                   "form",

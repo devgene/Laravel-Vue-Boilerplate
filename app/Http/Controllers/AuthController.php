@@ -61,7 +61,6 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)){
             return $this->getResponse($request->user());
         }else{
-            Log::info('fdfsd');
             return response()->json([
                 'message' => 'Some error occured, please try again',
                 'status_code' => 500
@@ -83,9 +82,10 @@ class AuthController extends Controller
         $token=$tokenResult->token;
         $token->expires_at = Carbon::now()->addWeeks(1);
         $token->save();
-        Log::info('autbhhhhh');
+//        $user->with('roles')->get();
         return response()->json([
             'user'=>$user,
+            'role'=>$user->getRoleNames(),
             'access_token'=>$tokenResult->accessToken,
             'token_type'=> 'Bearer',
             'expires_at'=>Carbon::parse($token->expires_at)->toDateTimeString(),

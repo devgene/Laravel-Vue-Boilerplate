@@ -18,7 +18,6 @@ export function login(user) {
 function setToken(user) {
     const token=jwt.sign({user: user},'laravelvueticketbooking');
     localStorage.setItem('laravel-vue-token',token);
-   // this.getAccessToken();
 }
 
 export function isLoggedIn() {
@@ -33,6 +32,16 @@ export function getAccessToken() {
     }
     const tokenData=jwt.decode(token);
     return tokenData.user.access_token;
+}
+
+export function getRole() {
+    const token = localStorage.getItem('laravel-vue-token');
+    if (!token){
+        return null;
+    }
+    const tokenData=jwt.decode(token);
+    return tokenData.user.role;
+
 }
 
 export function logout() {

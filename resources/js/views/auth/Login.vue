@@ -13,6 +13,7 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                 </div>
+                                <p id="error"></p>
                                 <form class="user" v-on:submit.prevent="login">
                                     <div class="form-group">
                                         <input type="email"
@@ -80,10 +81,17 @@
         },
         methods: {
             login: async function(){
-                try{
+                try {
                     const response = await auth.login(this.user);
-                    this.errors={};
-                    this.$router.push('/home');
+                    console.log(response);
+                    if (response.role === 'administrator'){
+                        this.$router.push('/home');
+                   }else {
+                        this.flashMessage.error({
+                            message: response.role +' is not allowed to login',
+                            time: 5000
+                        });
+                    }
                 }catch (error) {
                     switch (error.response.status) {
                         case 422:

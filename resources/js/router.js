@@ -14,7 +14,11 @@ const routes = [
             {
                 path: '',
                 name: 'dashboard',
-                component: () =>import('./views/Dashboard.vue')
+                component: () =>import('./views/Dashboard.vue'),
+                meta: {
+                    requiresAuth: true,
+                    role : 'administrator'
+                }
             },
             {
                 path: '/user',
@@ -30,7 +34,9 @@ const routes = [
         beforeEnter(to, from, next){
             if (!auth.isLoggedIn()){
                 next('/login')
-            }else {
+            }
+            else {
+                // this.$router.push('home')
                 next();
             }
         }
