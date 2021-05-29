@@ -53,8 +53,10 @@ const routes = [
         beforeEnter(to, from, next){
             if (!auth.isLoggedIn()){
                 next();
-            }else {
+            }else if (auth.getRole() === 'administrator'){
                 next('/home');
+            }else {
+                next();
             }
         }
     },
@@ -65,8 +67,10 @@ const routes = [
         beforeEnter(to, from, next){
             if (!auth.isLoggedIn()){
                 next();
-            }else {
+            }else if (auth.getRole() === 'administrator'){
                 next('/home');
+            }else {
+                next();
             }
         }
     },

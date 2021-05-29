@@ -83,7 +83,6 @@
             login: async function(){
                 try {
                     const response = await auth.login(this.user);
-                    console.log(response);
                     if (response.role === 'administrator'){
                         this.$router.push('/home');
                    }else {
