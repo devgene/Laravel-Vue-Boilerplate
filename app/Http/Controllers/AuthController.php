@@ -62,7 +62,7 @@ class AuthController extends Controller
             return $this->getResponse($request->user());
         }else{
             return response()->json([
-                'message' => 'Some error occured, please try again',
+                'message' => 'email or password doesnot match',
                 'status_code' => 500
             ],500);
         }
@@ -83,6 +83,7 @@ class AuthController extends Controller
         $token->expires_at = Carbon::now()->addWeeks(1);
         $token->save();
 //        $user->with('roles')->get();
+        Log::info('role'.$user->getRoleNames());
         return response()->json([
             'user'=>$user,
             'role'=>$user->getRoleNames(),

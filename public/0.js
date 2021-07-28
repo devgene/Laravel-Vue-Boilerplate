@@ -112,8 +112,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 response = _context.sent;
+                console.log('ROLE: ' + response.role);
 
-                if (response.role === 'administrator') {
+                if (response.role[0] === 'administrator') {
                   this.$router.push('/home');
                 } else {
                   this.flashMessage.error({
@@ -122,49 +123,49 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
                 }
 
-                _context.next = 19;
+                _context.next = 20;
                 break;
 
-              case 7:
-                _context.prev = 7;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](0);
                 _context.t1 = _context.t0.response.status;
-                _context.next = _context.t1 === 422 ? 12 : _context.t1 === 401 ? 14 : _context.t1 === 500 ? 16 : 18;
+                _context.next = _context.t1 === 422 ? 13 : _context.t1 === 401 ? 15 : _context.t1 === 500 ? 17 : 19;
                 break;
 
-              case 12:
+              case 13:
                 this.flashMessage.error({
                   message: _context.t0.response.data.errors,
                   time: 5000
                 });
-                return _context.abrupt("break", 19);
+                return _context.abrupt("break", 20);
 
-              case 14:
+              case 15:
                 this.flashMessage.error({
                   message: _context.t0.response.data.message,
                   time: 5000
                 });
-                return _context.abrupt("break", 19);
+                return _context.abrupt("break", 20);
 
-              case 16:
+              case 17:
                 this.flashMessage.error({
                   message: _context.t0.response.data.message,
                   time: 5000
                 });
-                return _context.abrupt("break", 19);
-
-              case 18:
-                this.flashMessage.error({
-                  message: _context.t0.response.data.message,
-                  time: 5000
-                });
+                return _context.abrupt("break", 20);
 
               case 19:
+                this.flashMessage.error({
+                  message: _context.t0.response.data.message,
+                  time: 5000
+                });
+
+              case 20:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 7]]);
+        }, _callee, this, [[0, 8]]);
       }));
 
       function login() {

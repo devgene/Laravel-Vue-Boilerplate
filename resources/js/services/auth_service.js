@@ -40,7 +40,7 @@ export function getRole() {
         return null;
     }
     const tokenData=jwt.decode(token);
-    console.log(tokenData.user.role);
+    console.log('TOKEN:'+tokenData.user.role);
     return tokenData.user.role;
 
 }

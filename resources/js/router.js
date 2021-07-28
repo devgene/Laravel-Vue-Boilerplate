@@ -62,17 +62,8 @@ const routes = [
     },
     {
         path: '/',
-        name: 'login',
-        component: () =>import('./views/auth/Login.vue'),
-        beforeEnter(to, from, next){
-            if (!auth.isLoggedIn()){
-                next();
-            }else if (auth.getRole() === 'administrator'){
-                next('/home');
-            }else {
-                next();
-            }
-        }
+        name: 'home',
+        component: () =>import('./views/Home.vue'),
     },
     {
         path: '/reset-password',
